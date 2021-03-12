@@ -4,7 +4,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="amuse"
+ZSH_THEME="dst"
 HIST_STAMPS="yyyy-mm-dd"
 
 export UPDATE_ZSH_DAYS=30
@@ -12,14 +12,13 @@ export UPDATE_ZSH_DAYS=30
 # For Solarized
 export TERM="xterm-256color"
 
-# home & end keys work
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
+# Biding some keys
+bindkey '\e[1~' beginning-of-line #Home
+bindkey '\e[4~' end-of-line #End
+bindkey "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
 
-# time in right of prompt
-RPROMPT=' [%*]'
-
-# default editor
+# Default editor
 export EDITOR="vi"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
@@ -34,35 +33,15 @@ COMPLETION_WAITING_DOTS="true"
 # brew install fzf && /usr/local/opt/fzf/install
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-plugins=(command-not-found debian docker docker-compose fancy-ctrl-z fzf git-extras gnu-utils npm yarn pip python wp-cli sudo zsh_reload z zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(adb brew command-not-found debian docker docker-compose direnv fasd fancy-ctrl-z fzf git-extras gnu-utils npm nvm yarn pip python wp-cli sudo zsh_reload z zsh-syntax-highlighting zsh-autosuggestions)
 # custom plugins: drall drs
 # plugin common-aliases breaks execution of php scripts with shebang, why?
 
-# User configuration
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-
+# Load oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 
-# percol awesome history search
-# g conflicts with zsh plugin 'git'
-function exists { which $1 &> /dev/null }
-if exists percol; then
-  function percol_select_history() {
-    local tac
-    exists gtac && tac="gtac" || { exists tac && tac="tac" || { tac="tail -r" } }
-    BUFFER=$(fc -l -n 1 | eval $tac | percol --query "$LBUFFER")
-    CURSOR=$#BUFFER         # move cursor
-    zle -R -c               # refresh
-  }
-
-  zle -N percol_select_history
-  bindkey '^R' percol_select_history
-
-  # percol based grep
-  g() { percol --match-method regex --query="$*"; }
-fi
-
+# Auto load
+[ -f "/opt/homebrew/bin/brew" ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 [[ -r "$HOME/.bash_profile" ]] && source "$HOME/.bash_profile"
 [[ -r "$HOME/.bash_aliases" ]] && source "$HOME/.bash_aliases"
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

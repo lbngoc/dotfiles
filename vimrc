@@ -29,9 +29,9 @@ Plug 'wesQ3/vim-windowswap'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-startify'
-"Plug 'terryma/vim-multiple-cursors'
-Plug 'Valloric/YouCompleteMe'
-Plug 'christoomey/vim-tmux-navigator'
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'christoomey/vim-tmux-navigator'
 Plug 'jiangmiao/auto-pairs'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdcommenter'
@@ -80,7 +80,7 @@ let mapleader=","
 let base16colorspace=256  " Access colors present in 256 colorspace
 
 " Quickly edit .vimrc file
-nmap <Leader>e :e ~/.vimrc<CR>                 
+nmap <Leader>e :e ~/.vimrc<CR>
 " Source .vimrc file
 noremap <Leader>r :so ~/.vimrc<CR>
 
